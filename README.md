@@ -1,3 +1,2 @@
-Recording voice based on **WebRTC** technology.
-
-Live Demo: comming soon...
+# webrtc-audio-recorder
+Recording voice based on WebRTC technology.

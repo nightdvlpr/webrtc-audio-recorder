@@ -31,7 +31,7 @@ class Recorder {
     }
 
     domLoader() {
-        console.log('Dom Loader...');
+        console.log('DOM Loading...');
         this.recordButton.addEventListener('click', this.start);
         this.recordButton.disabled = false;
         this.stopButton.addEventListener('click', this.stop);
