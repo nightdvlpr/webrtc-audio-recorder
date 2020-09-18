@@ -157,7 +157,7 @@ class Recorder {
         xhttp.send(this.blb_extracted);
     }
 
-    blobToFile(fileName) {
+    blobToFile = (fileName) => {
         //A Blob() is almost a File() - it's just missing the two properties below which we will add
         this.blb.lastModifiedDate = new Date();
         this.blb.name = fileName;
