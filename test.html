@@ -4,18 +4,6 @@
     <meta charset="utf-8">
     <title>Voice Recorder (BLOB)</title>
     <script src="main.js"></script>
-    <script>
-        window.onload = () => {
-            const recordButton = document.querySelector('#record');
-            const stopButton = document.querySelector('#stop');
-            const pauseButton = document.querySelector('#pause');
-            const saveButton = document.querySelector('#save');
-            const playButton = document.querySelector('#play');
-
-            // call the Recorder class.
-            new Recorder(recordButton, stopButton, pauseButton, saveButton, playButton).getUserMedia();
-        };
-    </script>
 </head>
 <body>
 <header><h1>Recording voice and save on DB as a BLOB</h1></header>

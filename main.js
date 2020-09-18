@@ -1,9 +1,21 @@
+window.onload = () => {
+    const recordButton = document.querySelector('#record');
+    const stopButton = document.querySelector('#stop');
+    const pauseButton = document.querySelector('#pause');
+    const saveButton = document.querySelector('#save');
+    const playButton = document.querySelector('#play');
+
+    // call the Recorder class.
+    new Recorder(recordButton, stopButton, pauseButton, saveButton, playButton).getUserMedia();
+};
+
 class Recorder {
     // chunks
     blb = [];
+    blb_extracted;
 
     // constructor
-    constructor(recordButton, stopButton, pauseButton, saveButton, playButton) {
+    constructor(recordButton, stopButton, pauseButton, saveButton, playButton, storeButton) {
         this.recordButton = recordButton;
         this.stopButton = stopButton;
         this.pauseButton = pauseButton;
@@ -76,6 +88,7 @@ class Recorder {
     stop = () => {
         this.recordButton.disabled = false;
         this.playButton.disabled = false;
+        this.saveButton.disabled = false;
         this.stopButton.disabled = true;
         // Stopping the recorder will eventually trigger the `dataavailable` event and we can complete the recording process
         this.recorder.stop();
@@ -91,11 +104,6 @@ class Recorder {
         else if (this.recorder.state.toString() == "paused") this.recorder.resume();
 
         console.log(this.recorder.state);
-    }
-
-    save = () => {
-        // save blob file as audio file (weba/mp3/etc)
-        console.log('_Save');
     }
 
     play = () => {
@@ -131,12 +139,11 @@ class Recorder {
 
             // let myFile = this.blobToFile("my-voice.weba");
             // console.log(myFile);
-
-            this.storing(text);
+            this.blb_extracted = text;
         });
     }
 
-    storing = (text) => {
+    save = () => {
         console.log("_Storing...");
 
         let xhttp = new XMLHttpRequest();
@@ -147,7 +154,7 @@ class Recorder {
             }
         };
         xhttp.open("POST", "http://localhost/hielina/v1/getUserMedia", true);
-        xhttp.send(text);
+        xhttp.send(this.blb_extracted);
     }
 
     blobToFile(fileName) {
